@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="快搜">
+  <defs>
+    <linearGradient id="quickSearchGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2563eb"/>
+      <stop offset="1" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="30" fill="url(#quickSearchGradient)"/>
+  <g fill="none" stroke="#ffffff" stroke-width="12.5" stroke-linecap="round">
+    <circle cx="53.8" cy="53.8" r="26.2"/>
+    <path d="M73.2 73.2 L96.7 96.7"/>
+  </g>
+  <path d="M42.5 47.5a14 14 0 0 1 7-4.5" fill="none" stroke="#ffffff" stroke-opacity="0.7" stroke-width="6.8" stroke-linecap="round"/>
+</svg>
