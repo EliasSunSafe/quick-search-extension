@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>快搜 · 设置</title>
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body class="options">
+  <div class="page">
+    <header class="page-head">
+      <div class="page-title">
+        <img src="../icons/icon48.png" alt="" width="40" height="40">
+        <div>
+          <h1>快搜 · 设置</h1>
+          <p class="muted">一键切换搜索引擎：面板、右键菜单与默认行为都在这里管理。</p>
+        </div>
+      </div>
+      <div class="page-actions">
+        <button type="button" class="btn" id="exportBtn">导出配置</button>
+        <button type="button" class="btn" id="importBtn">导入配置</button>
+        <input type="file" id="importFile" accept="application/json,.json" hidden>
+      </div>
+    </header>
+
+    <section class="card">
+      <div class="card-head">
+        <h2>搜索引擎</h2>
+        <button type="button" class="btn btn-primary" id="addBtn">+ 添加引擎</button>
+      </div>
+      <p class="muted small">
+        拖动左侧手柄可排序；带「默认」标记的引擎是面板与右键菜单的主入口。
+      </p>
+      <ul class="engine-list" id="engineList" aria-label="搜索引擎列表"></ul>
+    </section>
+
+    <section class="card">
+      <h2>通用设置</h2>
+      <div class="setting-row">
+        <div>
+          <div class="setting-title">默认搜索引擎</div>
+          <p class="muted small">打开面板时自动选中的引擎，也是右键「搜索“…”」使用的引擎。</p>
+        </div>
+        <select id="defaultEngine" aria-label="默认搜索引擎"></select>
+      </div>
+      <div class="setting-row">
+        <div>
+          <div class="setting-title">在新标签页打开结果</div>
+          <p class="muted small">关闭后，搜索结果会在当前标签页打开（面板里按住 Shift 回车可临时反向）。</p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="openInNewTab" aria-label="在新标签页打开结果">
+          <span class="track"></span>
+        </label>
+      </div>
+      <div class="setting-row">
+        <div>
+          <div class="setting-title">自动填入页面选中的文本</div>
+          <p class="muted small">打开面板时，如果有选中文字，会自动填进搜索框。</p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="prefillSelection" aria-label="自动填入选中文本">
+          <span class="track"></span>
+        </label>
+      </div>
+      <div class="setting-row">
+        <div>
+          <div class="setting-title">启用右键菜单</div>
+          <p class="muted small">选中文字后右键，可直接用默认或任意引擎搜索。</p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="enableContextMenu" aria-label="启用右键菜单">
+          <span class="track"></span>
+        </label>
+      </div>
+      <div class="setting-row">
+        <div>
+          <div class="setting-title">显示搜索引擎图标</div>
+          <p class="muted small">自动读取各引擎站点的 /favicon.ico；关掉后只显示字母徽标，也不再发起图片请求。</p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="showEngineIcons" aria-label="显示搜索引擎图标">
+          <span class="track"></span>
+        </label>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>数据</h2>
+      <p class="muted small">
+        配置保存在浏览器的同步存储里（登录同一账户的 Edge 会自动同步），不会上传到任何第三方服务器。
+      </p>
+      <div class="row-actions">
+        <button type="button" class="btn" id="exportBtn2">导出 JSON</button>
+        <button type="button" class="btn" id="importBtn2">导入 JSON</button>
+        <button type="button" class="btn btn-danger" id="resetBtn">恢复默认</button>
+      </div>
+    </section>
+
+    <p class="footer-note muted small">快搜 v1.3.0 · 不收集任何数据 · 官方图标走浏览器 favicon 缓存</p>
+  </div>
+
+  <dialog class="dialog" id="engineDialog" aria-labelledby="dialogTitle">
+    <form class="dialog-body" id="engineForm" novalidate>
+      <h2 id="dialogTitle">添加搜索引擎</h2>
+
+      <label class="field">
+        <span>名称</span>
+        <input id="fName" maxlength="24" placeholder="例如：Google" autocomplete="off">
+      </label>
+
+      <label class="field">
+        <span>搜索地址</span>
+        <input id="fUrl" placeholder="https://www.google.com/search?q=%s" autocomplete="off" spellcheck="false">
+        <small class="muted">必须包含 <code>%s</code> 占位符（旧的 <code>{q}</code> 会自动转换），搜索词会替换到这里。</small>
+      </label>
+
+      <label class="field">
+        <span>图标地址（可选）</span>
+        <span class="field-row">
+          <input id="fIcon" placeholder="留空则自动获取站点图标" autocomplete="off" spellcheck="false">
+          <span class="icon-preview" id="iconPreview" aria-hidden="true"></span>
+        </span>
+        <small class="muted">留空时自动读取搜索地址所属站点的 <code>/favicon.ico</code>，再不行就用左边的字母徽标。</small>
+      </label>
+
+      <div class="field-grid">
+        <label class="field">
+          <span>徽标文字（1–3 个字符）</span>
+          <input id="fBadge" maxlength="3" placeholder="G" autocomplete="off">
+        </label>
+        <label class="field">
+          <span>颜色</span>
+          <input id="fColor" type="color" value="#64748b">
+        </label>
+      </div>
+
+      <label class="check"><input type="checkbox" id="fEnabled" checked> <span>启用这个引擎</span></label>
+
+      <p class="form-error" id="formError" role="alert"></p>
+
+      <div class="dialog-actions">
+        <button type="button" class="btn" id="cancelBtn">取消</button>
+        <button type="submit" class="btn btn-primary">保存</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="options.js"></script>
+</body>
+</html>

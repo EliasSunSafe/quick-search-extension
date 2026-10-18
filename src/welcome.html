@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>欢迎使用快搜</title>
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body class="options">
+  <div class="page welcome">
+    <img src="../icons/icon128.png" alt="" width="76" height="76">
+    <h1>快搜已安装</h1>
+    <p class="muted">一个面板完成「输入关键词 + 切换引擎 + 回车搜索」。</p>
+
+    <ol class="steps">
+      <li>
+        <strong>1. 固定到工具栏</strong>
+        <span>点击 Edge 工具栏的扩展图标，把「快搜」固定，之后点一下就能打开面板。</span>
+      </li>
+      <li>
+        <strong>2. 输入关键词，回车搜索</strong>
+        <span>点引擎卡片切换引擎；搜索框里有内容时点卡片，会立刻用新引擎重新搜索。</span>
+      </li>
+      <li>
+        <strong>3. 右键搜索选中文本</strong>
+        <span>选中文字后右键 →「用「Bing」搜索」，展开还能选任意引擎。</span>
+      </li>
+    </ol>
+
+    <div class="row-actions">
+      <button type="button" class="btn btn-primary" id="openOptions">打开设置</button>
+      <button type="button" class="btn" id="closeTab">关闭这个页面</button>
+    </div>
+  </div>
+  <script type="module" src="welcome.js"></script>
+</body>
+</html>

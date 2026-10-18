@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>快搜</title>
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main class="popup">
+    <header class="popup-head">
+      <div class="brand">
+        <img class="brand-icon" src="../icons/icon32.png" alt="" width="20" height="20">
+        <span class="brand-name">快搜</span>
+        <span class="brand-current" id="currentEngine" title="当前搜索引擎">Bing</span>
+      </div>
+      <button type="button" class="icon-btn" id="openOptions" title="设置" aria-label="打开设置">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+      </button>
+    </header>
+
+    <form class="search" id="searchForm" autocomplete="off" novalidate>
+      <input class="search-input" id="query" type="text" placeholder="输入关键词，Enter 搜索" aria-label="搜索关键词"
+        spellcheck="false">
+      <button class="search-btn" id="submitBtn" type="submit" aria-label="用当前引擎搜索" title="搜索（Enter）">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+          stroke-linecap="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="m16.5 16.5 4 4"></path>
+        </svg>
+      </button>
+    </form>
+
+    <p class="hint">
+      <span><kbd>Enter</kbd> 搜索</span>
+      <span class="hint-dot">·</span>
+      <span>点击卡片切换引擎</span>
+    </p>
+
+    <div class="engines" id="engines" role="group" aria-label="搜索引擎列表"></div>
+
+    <footer class="popup-foot">
+      <label class="check"><input type="checkbox" id="newTab"> <span>新标签页打开</span></label>
+      <span class="status" id="status" role="status" aria-live="polite"></span>
+    </footer>
+  </main>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+/* 快搜 · 弹出面板 */
+
+html {
+  scrollbar-width: thin;
+}
+
+body {
+  width: 380px;
+}
+
+.popup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 14px 10px;
+}
+
+/* 顶栏 ------------------------------------------------------------ */
+
+.popup-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 2px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.brand-icon {
+  border-radius: 6px;
+}
+
+.brand-name {
+  font-size: 14px;
+  font-weight: 650;
+  letter-spacing: 0.2px;
+}
+
+.brand-current {
+  max-width: 150px;
+  overflow: hidden;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--muted);
+  font-size: 11.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 搜索框 ---------------------------------------------------------- */
+
+.search {
+  display: flex;
+  gap: 8px;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 0;
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.search-input::placeholder {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.search-btn {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 46px;
+  height: 42px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--accent);
+  color: var(--on-accent);
+  transition: filter 0.12s, transform 0.12s;
+}
+
+.search-btn:hover {
+  filter: brightness(1.06);
+}
+
+.search-btn:active {
+  transform: scale(0.97);
+}
+
+@keyframes shake {
+  10%, 90% { transform: translateX(-1px); }
+  20%, 80% { transform: translateX(2px); }
+  30%, 50%, 70% { transform: translateX(-3px); }
+  40%, 60% { transform: translateX(3px); }
+}
+
+.search.is-shaking {
+  animation: shake 0.4s;
+}
+
+/* 操作提示 -------------------------------------------------------- */
+
+.hint {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  margin-top: -2px;
+  padding: 0 2px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.hint span {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.hint-dot {
+  opacity: 0.5;
+}
+
+/* 引擎列表 -------------------------------------------------------- */
+
+.engines {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  max-height: 304px;
+  margin: 0 -2px;
+  padding: 2px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.engines:empty::after {
+  content: "没有启用的搜索引擎，请点击右上角设置";
+  grid-column: 1 / -1;
+  padding: 18px 8px;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 8px 9px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text);
+  text-align: left;
+  transition: border-color 0.12s, background 0.12s, box-shadow 0.12s, transform 0.12s;
+}
+
+.chip:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
+  transform: translateY(-1px);
+}
+
+.chip.is-active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.chip-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  font-size: 12.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 底栏 ------------------------------------------------------------ */
+
+.popup-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 2px 0;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.status {
+  overflow: hidden;
+  color: var(--accent);
+  font-size: 11.5px;
+  opacity: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+
+.status.is-visible {
+  opacity: 1;
+}
+
+.status.is-error {
+  color: var(--danger);
+}
